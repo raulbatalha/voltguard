@@ -15,10 +15,10 @@ jobs:
 
       - name: Cópias do núcleo sincronizadas
         run: |
-          for d in wokwi wokwi_sct_chip wokwi_ensaio firmware/VoltGuard_Ensaio; do
+          for d in wokwi wokwi_sct_chip wokwi_ensaio firmware/VoltGuard Ensaio; do
             cmp firmware/VoltGuard/voltguard_core.h "$d/voltguard_core.h"
           done
-          for d in wokwi_ensaio firmware/VoltGuard_Ensaio; do
+          for d in wokwi_ensaio firmware/VoltGuard Ensaio; do
             cmp firmware/VoltGuard/voltguard_bancada.h "$d/voltguard_bancada.h"
           done
 
