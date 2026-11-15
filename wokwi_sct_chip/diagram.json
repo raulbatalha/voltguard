@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "author": "VoltGuard",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ds18b20",
+      "id": "tponto",
+      "top": -120,
+      "left": 180,
+      "attrs": {
+        "deviceID": "111111111111",
+        "temperature": "36"
+      }
+    },
+    {
+      "type": "wokwi-ds18b20",
+      "id": "tamb",
+      "top": -120,
+      "left": 270,
+      "attrs": {
+        "deviceID": "222222222222",
+        "temperature": "33"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -150,
+      "left": 120,
+      "attrs": {
+        "value": "4700"
+      },
+      "rotate": 90
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_ok",
+      "top": 120,
+      "left": 300,
+      "attrs": {
+        "color": "green",
+        "label": "NORMAL"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_al",
+      "top": 120,
+      "left": 360,
+      "attrs": {
+        "color": "yellow",
+        "label": "ALERTA"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_cr",
+      "top": 120,
+      "left": 420,
+      "attrs": {
+        "color": "red",
+        "label": "CRITICO"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 220,
+      "left": 250,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": 250,
+      "left": 250,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r4",
+      "top": 280,
+      "left": 250,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 230,
+      "left": 470,
+      "attrs": {
+        "volume": "0.2"
+      }
+    },
+    {
+      "type": "chip-sct013-sim",
+      "id": "sct1",
+      "top": 60,
+      "left": -200,
+      "attrs": {
+        "corrente": "0",
+        "vref": "1.32"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "tponto:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "tponto:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "tponto:DQ",
+      "esp:4",
+      "green",
+      []
+    ],
+    [
+      "tamb:VCC",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "tamb:GND",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "tamb:DQ",
+      "esp:4",
+      "green",
+      []
+    ],
+    [
+      "r1:1",
+      "esp:3V3",
+      "red",
+      []
+    ],
+    [
+      "r1:2",
+      "esp:4",
+      "green",
+      []
+    ],
+    [
+      "esp:25",
+      "r2:1",
+      "green",
+      []
+    ],
+    [
+      "r2:2",
+      "led_ok:A",
+      "green",
+      []
+    ],
+    [
+      "led_ok:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:26",
+      "r3:1",
+      "gold",
+      []
+    ],
+    [
+      "r3:2",
+      "led_al:A",
+      "gold",
+      []
+    ],
+    [
+      "led_al:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:27",
+      "r4:1",
+      "orange",
+      []
+    ],
+    [
+      "r4:2",
+      "led_cr:A",
+      "orange",
+      []
+    ],
+    [
+      "led_cr:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:13",
+      "bz1:2",
+      "violet",
+      []
+    ],
+    [
+      "bz1:1",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "sct1:OUT",
+      "esp:34",
+      "blue",
+      []
+    ],
+    [
+      "sct1:GND",
+      "esp:GND.1",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}

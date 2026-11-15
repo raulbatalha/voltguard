@@ -1,0 +1,31 @@
+# Compilação
+*.o
+*.out
+*.exe
+*.bin
+*.elf
+build/
+.pio/
+firmware/test/test_core
+firmware/test/t
+firmware/test/host_*
+ensaio/sim/bancada
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Arquivos temporários de geração
+protoboard/protoboard_rot.png
+desenho/esquema_preview.png
+
+# Editores e sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Segredos (nunca versionar senha de Wi-Fi ou tokens)
+secrets.h
+.env

@@ -1,0 +1,5 @@
+*.stl  binary
+*.pdf  binary
+*.png  binary
+*.ino  linguist-language=C++
+ensaio/sim/dados/*.csv linguist-generated=true

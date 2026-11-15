@@ -1,0 +1,7 @@
+name: 'VoltGuard - bancada virtual completa (VG-PE-05)'
+version: 1
+author: 'Projeto VoltGuard'
+
+steps:
+  - wait-serial: 'VoltGuard Bancada Virtual Rev. B'
+  - wait-serial: 'RESULTADO GERAL: APROVADO'

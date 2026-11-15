@@ -1,0 +1,100 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  testes:
+    name: Testes do núcleo e bancada virtual
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cópias do núcleo sincronizadas
+        run: |
+          for d in wokwi wokwi_sct_chip wokwi_ensaio firmware/VoltGuard_Ensaio; do
+            cmp firmware/VoltGuard/voltguard_core.h "$d/voltguard_core.h"
+          done
+          for d in wokwi_ensaio firmware/VoltGuard_Ensaio; do
+            cmp firmware/VoltGuard/voltguard_bancada.h "$d/voltguard_bancada.h"
+          done
+
+      - name: Testes unitários do núcleo
+        working-directory: firmware/test
+        run: g++ -std=c++17 -Wall -I../VoltGuard test_core.cpp -o test_core && ./test_core
+
+      - name: Firmware no PC com hardware simulado
+        working-directory: firmware/test
+        run: |
+          g++ -std=c++17 -Imock -I../VoltGuard -include Arduino.h -DMODO_SIMULACAO=1 -DUSAR_MQTT=1 \
+            -x c++ ../VoltGuard/VoltGuard.ino -x none main_host.cpp -o host
+          ./host > /dev/null
+
+      - name: Bancada virtual (roteiro VG-PE-05)
+        working-directory: ensaio/sim
+        run: g++ -O2 -std=c++17 -I../../firmware/VoltGuard bancada_pc.cpp -o bancada && ./bancada
+
+      - name: Conferência da montagem em protoboard
+        run: |
+          pip install --quiet matplotlib
+          python3 protoboard/protoboard.py
+
+  firmware:
+    name: Compilação para ESP32
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Núcleo ESP32 e bibliotecas
+        run: |
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls https://espressif.github.io/arduino-esp32/package_esp32_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+          arduino-cli lib install OneWire DallasTemperature PubSubClient
+
+      - name: Firmware do protótipo
+        run: arduino-cli compile --fqbn esp32:esp32:esp32 firmware/VoltGuard
+
+      - name: Ensaio automático
+        run: arduino-cli compile --fqbn esp32:esp32:esp32 firmware/VoltGuard_Ensaio
+
+      - name: Versão de simulação com MQTT (pasta wokwi)
+        run: |
+          mkdir -p /tmp/sketch
+          cp wokwi/sketch.ino wokwi/voltguard_core.h /tmp/sketch/
+          arduino-cli compile --fqbn esp32:esp32:esp32 /tmp/sketch
+
+  wokwi:
+    name: Ensaio no simulador Wokwi (opcional)
+    runs-on: ubuntu-latest
+    needs: firmware
+    env:
+      WOKWI_CLI_TOKEN: ${{ secrets.WOKWI_CLI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.WOKWI_CLI_TOKEN != ''
+      - uses: actions/setup-python@v5
+        if: env.WOKWI_CLI_TOKEN != ''
+        with:
+          python-version: '3.12'
+      - name: Compilar com PlatformIO
+        if: env.WOKWI_CLI_TOKEN != ''
+        run: |
+          pip install --quiet platformio
+          pio run -d wokwi_ensaio
+      - name: Executar cenário no Wokwi
+        if: env.WOKWI_CLI_TOKEN != ''
+        uses: wokwi/wokwi-ci-action@v1
+        with:
+          token: ${{ secrets.WOKWI_CLI_TOKEN }}
+          path: wokwi_ensaio
+          timeout: 900000
+          scenario: ensaio.test.yaml
+      - name: Aviso
+        if: env.WOKWI_CLI_TOKEN == ''
+        run: echo "Segredo WOKWI_CLI_TOKEN não configurado; ensaio no Wokwi ignorado."

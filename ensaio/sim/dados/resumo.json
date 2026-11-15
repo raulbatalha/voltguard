@@ -1,0 +1,16 @@
+{
+"e1_erro_max_2_15A_pct": 0.140,
+"e2_ruido_max_A": 0.1126, "e2_ruido_medio_A": 0.1052,
+"e2_leitura_com_piso_A": 0.0000,
+"e4_k_real": 0.060, "e4_k_estimado": 0.05937,
+"cenarios": [
+  {"id": "C1", "nome": "Normal (2 A)", "rep": [{"ok": true, "t_det": 61, "trocas": 2, "motivo": "ok"}, {"ok": true, "t_det": 61, "trocas": 2, "motivo": "ok"}, {"ok": true, "t_det": 61, "trocas": 2, "motivo": "ok"}]},
+  {"id": "C2", "nome": "Corrente alta sem resposta termica (8 A)", "rep": [{"ok": true, "t_det": 61, "trocas": 3, "motivo": "ok"}, {"ok": true, "t_det": 61, "trocas": 3, "motivo": "ok"}, {"ok": true, "t_det": 61, "trocas": 3, "motivo": "ok"}]},
+  {"id": "C3", "nome": "Sobrecarga (8 A e ar quente na sonda)", "rep": [{"ok": true, "t_det": 71, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 71, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 71, "trocas": 4, "motivo": "ok"}]},
+  {"id": "C4", "nome": "Mau contato emulado (4 A, aquecimento anormal)", "rep": [{"ok": true, "t_det": 210, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 212, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 206, "trocas": 4, "motivo": "ok"}]},
+  {"id": "C5", "nome": "Aquecimento externo sem corrente", "rep": [{"ok": true, "t_det": 115, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 117, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 115, "trocas": 4, "motivo": "ok"}]},
+  {"id": "C6", "nome": "Falha e reconexao da sonda de ambiente", "rep": [{"ok": true, "t_det": 81, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 81, "trocas": 4, "motivo": "ok"}, {"ok": true, "t_det": 81, "trocas": 4, "motivo": "ok"}]},
+  {"id": "C7", "nome": "Sobrecarga seguida de resfriamento", "rep": [{"ok": true, "t_det": 332, "trocas": 6, "motivo": "ok"}, {"ok": true, "t_det": 336, "trocas": 6, "motivo": "ok"}, {"ok": true, "t_det": 336, "trocas": 6, "motivo": "ok"}]}
+],
+"estabilidade_trocas": [1, 1, 1]
+}

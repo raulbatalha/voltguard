@@ -1,0 +1,26 @@
+{
+  "name": "SCT-013-030 + divisor (VoltGuard)",
+  "author": "Projeto VoltGuard",
+  "pins": [
+    "OUT",
+    "GND"
+  ],
+  "controls": [
+    {
+      "id": "corrente",
+      "label": "Corrente eficaz no condutor (A)",
+      "type": "range",
+      "min": 0,
+      "max": 30,
+      "step": 0.1
+    },
+    {
+      "id": "vref",
+      "label": "Referência do divisor (V)",
+      "type": "range",
+      "min": 1.0,
+      "max": 1.8,
+      "step": 0.01
+    }
+  ]
+}

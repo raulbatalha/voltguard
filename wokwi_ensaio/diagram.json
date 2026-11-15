@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "author": "VoltGuard",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_ok",
+      "top": 40,
+      "left": 200,
+      "attrs": {
+        "color": "green",
+        "label": "APROVADO"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_falha",
+      "top": 40,
+      "left": 260,
+      "attrs": {
+        "color": "red",
+        "label": "REPROVADO"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 130,
+      "left": 180,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 160,
+      "left": 240,
+      "attrs": {
+        "value": "330"
+      }
+    }
+  ],
+  "connections": [
+    [
+      "esp:TX",
+      "$serialMonitor:RX",
+      "",
+      []
+    ],
+    [
+      "esp:RX",
+      "$serialMonitor:TX",
+      "",
+      []
+    ],
+    [
+      "esp:25",
+      "r1:1",
+      "green",
+      []
+    ],
+    [
+      "r1:2",
+      "led_ok:A",
+      "green",
+      []
+    ],
+    [
+      "led_ok:C",
+      "esp:GND.2",
+      "black",
+      []
+    ],
+    [
+      "esp:27",
+      "r2:1",
+      "orange",
+      []
+    ],
+    [
+      "r2:2",
+      "led_falha:A",
+      "orange",
+      []
+    ],
+    [
+      "led_falha:C",
+      "esp:GND.2",
+      "black",
+      []
+    ]
+  ],
+  "dependencies": {}
+}
