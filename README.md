@@ -132,7 +132,17 @@ O VoltGuard é um equipamento de **monitoramento e alerta**, não de proteção,
 
 ## Equipe
 
-Projeto desenvolvido por *(nomes da equipe)*, *(instituição e curso)*, sob orientação de *(orientador)*.
+Projeto desenvolvido no [Centro Universitário do Norte (UniNorte)](https://www.uninorte.com.br/), curso de *(nome do curso)*, sob orientação do Prof. Eng. Raul Batalha.
+
+| Integrante |
+|---|
+| Samuel Filgueiras |
+| Victor Uchoa |
+| Bruno Falcão |
+| Aline Pereira |
+| Elionay Garcia |
+
+**Orientador:** Prof. Eng. Raul Batalha
 
 ## Licença
 
